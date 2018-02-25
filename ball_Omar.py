@@ -20,16 +20,16 @@ class Ball(Turtle):
 		self.color(color)
 		
 	def top(self):
-		return ycor+radius/2
+		return self.ycor()+self.radius/2
 		
 	def bottom(self):
-		return ycor-radius/2
+		return self.ycor()-self.radius/2
 	
 	def right(self):
-		return xcor+radius/2
+		return self.xcor()+self.radius/2
 		
 	def left(self):
-		return xcor-radius/2
+		return self.xcor()-self.radius/2
 		
 	def move(self,screen_width,screen_height):
 		current_x=self.xcor()
@@ -56,7 +56,9 @@ class Ball(Turtle):
 			self.dy= - self.dy 
 
 		elif bottom_side_ball<bottom_edge:
-			time.sleep(5)
+			# time.sleep(5)
+			self.dy=0
+			self.dx=0
 
 
 
