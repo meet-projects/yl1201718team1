@@ -67,7 +67,8 @@ turtle.getscreen().listen()
 while True:
 	move_all_balls()
 	turtle.update()
+	#time.sleep(0.007)
 
 
-	
+
 turtle.mainloop()
