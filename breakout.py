@@ -7,32 +7,53 @@ from ball import Ball
 import math
 
 
-#tracer(0)
-# hideturtle()
+tracer(0)
 
 
 
-   
+	
+
+
 t=20
 l=-290
 SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
+
+		
+
+
+platform=turtle.clone()
+platform.penup()
+platform.shape("square")
+platform.shapesize(0.8,7)
+platform.goto(0,-SCREEN_HEIGHT+20)
+
+
 BLOCKS=[]
 NUMBER_OF_BLOCKS_LINE=9
 NUMBER_OF_BLOCKS_COLUMN=10
 for i in range(NUMBER_OF_BLOCKS_COLUMN):
-    color=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
-    for g in range(NUMBER_OF_BLOCKS_LINE):
-   	 x=l
-   	 y=SCREEN_HEIGHT-t
-   	 new_block=Block(x,y,color)
-   	 BLOCKS.append(new_block)
-   	 l=l+70
-    t=t+25
-    l=-290
+	color=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+	for g in range(NUMBER_OF_BLOCKS_LINE):
 
-MY_BALL=Ball(0,0,0,0,10,"turquoise")
-MY_BALL.goto(0,-SCREEN_HEIGHT+30)
+		x=l
+		y=SCREEN_HEIGHT-t
+		new_block=Block(x,y,color)
+		BLOCKS.append(new_block)
+
+		l=l+70
+	t=t+25
+	l=-290
+# turtle.pu()
+# turtle.goto(1000,0)
+# turtle.pd()
+turtle.ht()
+
+MY_BALL=Ball(0,0,1,1,10,"turquoise")
+MY_BALL.goto(0,-SCREEN_HEIGHT+50)
+
+def move_all_balls():
+	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT)
 
 def collision(ball_a,block_a):
 	if(
@@ -42,6 +63,21 @@ def collision(ball_a,block_a):
 	ball_a.left() <= block_a.right()
 	):
 		return collision
+
+def movearound(event):
+	platform.goto(event.x-SCREEN_WIDTH,-SCREEN_HEIGHT+20)
+
+turtle.getcanvas().bind("<Motion>",movearound)
+turtle.getscreen().listen()
+
+
+
+
+
+
+
+
+
 
 
 	
@@ -109,4 +145,10 @@ def check_myball_collision():
 					print(MY_BALL_RADIUS)
 					MY_BALL.shapesize(MY_BALL_RADIUS/10)
 
-time.sleep(2)
+
+while True:
+	turtle.update()
+	move_all_balls()
+turtle.write("GAME OVER")
+
+turtle.mainloop()

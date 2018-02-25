@@ -1,6 +1,7 @@
 from turtle import *
 import random
 import math
+import time
 
 
 #tracer(0)
@@ -55,7 +56,8 @@ class Ball(Turtle):
 			self.dy= - self.dy 
 
 		elif bottom_side_ball<bottom_edge:
-			self.dy= -self.dy
+			time.sleep(5)
+
 
 
 #ball_1=Ball(0,0,5,10,30,"blue")
