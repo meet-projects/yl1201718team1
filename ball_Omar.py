@@ -56,9 +56,9 @@ class Ball(Turtle):
 			self.dy= - self.dy 
 
 		elif bottom_side_ball<bottom_edge:
-			write("GAME OVER",True,align="center",font=("Arial",25,"normal"))
-			time.sleep(5)
-
+			# time.sleep(5)
+			self.dy=0
+			self.dx=0
 
 
 
