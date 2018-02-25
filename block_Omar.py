@@ -15,4 +15,14 @@ class Block(Turtle):
 		self.shapesize(self.a,self.b)
 		self.color(color)
 
-time.sleep(2)
+	def top(self):
+		return self.ycor()+self.a*10
+		
+	def bottom(self):
+		return self.ycor()-self.a*10
+	
+	def right(self):
+		return self.xcor()+self.b*10
+		
+	def left(self):
+		return self.xcor()-self.b*10
