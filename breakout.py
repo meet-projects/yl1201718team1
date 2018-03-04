@@ -2,15 +2,19 @@ from turtle import *
 import random
 import turtle
 import time
-from block import Block
-from ball import Ball
+from block_Omar import Block
+from ball_Omar import Ball
 import math
 
 
 tracer(0)
 
+IS_GAME_OVER = False
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 score=0
 score_total=turtle.clone()	
 
@@ -20,6 +24,7 @@ l=-290
 SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
 
+<<<<<<< HEAD
 i=0
 def inst(event):
 
@@ -56,13 +61,13 @@ for i in range (100):
 	turtle.getcanvas().bind("2",play)
 	turtle.getcanvas().bind("1",inst)
 	turtle.listen()				
+=======
 
+		
+>>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 
-platform=turtle.clone()
-platform.penup()
-platform.shape("square")
-platform.shapesize(0.8,7)
-platform.goto(0,-SCREEN_HEIGHT+20)
+platform=Block(0,-SCREEN_HEIGHT+20,"black",0.8,7)
+
 
 height = 3
 width = 1
@@ -76,7 +81,11 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 
 		x=l
 		y=SCREEN_HEIGHT-t
+<<<<<<< HEAD
 		new_block=Block(x,y,color,width,height)
+=======
+		new_block=Block(x,y,color,1,3)
+>>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 		BLOCKS.append(new_block)
 
 		l=l+70
@@ -91,7 +100,7 @@ MY_BALL=Ball(0,0,1,1,10,"turquoise")
 MY_BALL.goto(0,-SCREEN_HEIGHT+50)
 
 def move_all_balls():
-	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT)
+	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT, BLOCKS)
 
 def collision(ball_a,block_a):
 	if(
@@ -115,7 +124,9 @@ turtle.getscreen().listen()
 
 
 
-
+def ball_plat():
+	if collision(platform,MY_BALL)==True:
+		MY_BALL.dy=-(MY_BALL.dy)
 
 
 
@@ -127,8 +138,15 @@ def check_myball_collision():
 	global score , score_total
 	for b in BLOCKS:
 		if collision(MY_BALL,b) == True:
+<<<<<<< HEAD
 			print("collided")
 			b.hideturtle()
+=======
+			b.ht()
+			BLOCKS.remove(b)
+
+			
+>>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 				
 		
 			if score == 10000:
@@ -150,6 +168,7 @@ def check_myball_collision():
 				score_total.clear()
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
+<<<<<<< HEAD
 			
 
 while True:
@@ -158,5 +177,17 @@ while True:
 	check_myball_collision()
 
 
+=======
+
+while IS_GAME_OVER != True:
+	move_all_balls()
+	check_myball_collision()
+	ball_plat()
+
+	turtle.update()
+	
+
+turtle.write("GAME OVER")
+>>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 
 turtle.mainloop()
