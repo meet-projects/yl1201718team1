@@ -53,11 +53,14 @@ class Ball(Turtle):
 			self.dx = -self.dx
 
 		elif top_side_ball>top_edge:
+			print("top")
 			self.dy= - self.dy 
 
 		elif bottom_side_ball<bottom_edge:
+			print("game over")
 			write("GAME OVER",True,align="center",font=("Arial",25,"normal"))
 			time.sleep(5)
+			exit()
 
 
 

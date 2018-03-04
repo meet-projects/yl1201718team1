@@ -31,7 +31,7 @@ class Ball(Turtle):
 	def left(self):
 		return self.xcor()-self.radius/2
 		
-	def move(self,screen_width,screen_height):
+	def move(self,screen_width,screen_height, BLOCKS):
 		current_x=self.xcor()
 		current_y=self.ycor()
 		new_x=current_x+self.dx
@@ -56,9 +56,29 @@ class Ball(Turtle):
 			self.dy= - self.dy 
 
 		elif bottom_side_ball<bottom_edge:
+			print("game over")
+			write("GAME OVER",True,align="center",font=("Arial",25,"normal"))
+			time.sleep(5)
+			exit()
 			# time.sleep(5)
 			self.dy=0
 			self.dx=0
+
+		for block in BLOCKS:
+			if self.top() >= block.bottom():
+				self.dy = -self.dy
+
+			elif self.right() >= block.left():
+				self.dx = -self.dx
+			
+			elif self.bottom() <= block.top():
+				self.dy = -self.dy
+
+			elif self.left() <= block.right():
+				self.dx = -self.dx
+			
+
+
 
 
 

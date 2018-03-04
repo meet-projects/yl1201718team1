@@ -9,7 +9,7 @@ import math
 
 tracer(0)
 
-
+IS_GAME_OVER = False
 
 score=0
 score_total=turtle.clone()	
@@ -19,6 +19,7 @@ t=20
 l=-290
 SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
+
 
 		
 
@@ -50,7 +51,7 @@ MY_BALL=Ball(0,0,1,1,10,"turquoise")
 MY_BALL.goto(0,-SCREEN_HEIGHT+50)
 
 def move_all_balls():
-	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT)
+	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT, BLOCKS)
 
 def collision(ball_a,block_a):
 	if(
@@ -76,7 +77,6 @@ turtle.getscreen().listen()
 
 def ball_plat():
 	if collision(platform,MY_BALL)==True:
-		print("collided")
 		MY_BALL.dy=-(MY_BALL.dy)
 
 
@@ -89,8 +89,9 @@ def check_myball_collision():
 	global score , score_total
 	for b in BLOCKS:
 		if collision(MY_BALL,b) == True:
-			print("collided")
-			b.hideturtle()
+			b.ht()
+			BLOCKS.remove(b)
+
 			
 				
 		
@@ -114,12 +115,13 @@ def check_myball_collision():
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
 
-while True:
+while IS_GAME_OVER != True:
 	move_all_balls()
 	check_myball_collision()
 	ball_plat()
 
 	turtle.update()
+	
 
 turtle.write("GAME OVER")
 
