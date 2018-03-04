@@ -2,7 +2,7 @@ import turtle
 import time
 import random
 from block_shelly import Block
-from ball_shelly import Ball
+from ball import Ball
 import math
 
 turtle.tracer(0)
@@ -12,6 +12,7 @@ t=20
 l=-290
 SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
+print(SCREEN_HEIGHT, SCREEN_WIDTH)
 
 
 platform=turtle.clone()
@@ -54,9 +55,9 @@ def collide(a,b,c,d):
 		return True
 	else:
 		return False
-if(collide(MY_BALL,platform,MY_BALL.r,-SCREEN_HEIGHT+40)):
-	MY_BALL.dx=-1*MY_BALL.dx
-	MY_BALL.dy=-1*MY_BALL.dy
+#if(collide(MY_BALL,platform,MY_BALL.r,-SCREEN_HEIGHT+40)):
+	#MY_BALL.dx=-1*MY_BALL.dx
+	#MY_BALL.dy=-1*MY_BALL.dy
 
 def movearound(event):
 	platform.goto(event.x-SCREEN_WIDTH,-SCREEN_HEIGHT+20)
