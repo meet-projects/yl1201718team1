@@ -1,7 +1,7 @@
 import turtle
 import time
 
-def inst():
+def inst(event):
 
 	inn=turtle.clone()
 	inn.home()
@@ -10,7 +10,7 @@ def inst():
 	inn.shape("in.gif")
 	inn.stamp()
 	turtle.update()
-def play():
+def play(event):
 	turtle.clear()
 	turtle.update()
 
@@ -28,15 +28,12 @@ turtle.write("""
 
 		PRESS ENTER TO QUIT
 		""",True, align="center", font=("Helvetica", 24, "bold italic"))
+def bye(event):
+	turtle.bye()
 
-#urtle.onkey(inst(),"<1>")
-#rtle.onkey(play(),"<2>")
-#urtle.onkey(turtle.bye(),"<Enter>")
-turtle.getcanvas().bind("<Enter>",turtle.bye)
-turtle.getcanvas().bind("<2>",play)
-turtle.getcanvas().bind("<1>",inst)
+turtle.getcanvas().bind("<Return>",bye)
+turtle.getcanvas().bind("2",play)
+turtle.getcanvas().bind("1",inst)
 turtle.listen()
-
-time.sleep(7)
 
 turtle.mainloop()

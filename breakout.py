@@ -11,7 +11,8 @@ tracer(0)
 
 
 
-	
+score=0
+score_total=turtle.clone()	
 
 
 t=20
@@ -19,7 +20,42 @@ l=-290
 SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
 
-		
+i=0
+def inst(event):
+
+	inn=turtle.clone()
+	inn.home()
+	turtle.clear()
+	turtle.addshape("in.gif")
+	inn.shape("in.gif")
+	inn.stamp()
+	turtle.update()
+def play(event):
+	turtle.clear()
+	turtle.update()
+	i=1
+
+ans = True
+turtle.ht()
+turtle.tracer(0)
+turtle.penup()
+turtle.goto (-100,-100)
+turtle.write("""
+		1. INSTRUCTIONS
+		2. PLAY!!
+
+
+
+
+		PRESS ENTER TO QUIT
+		""",True, align="center", font=("Helvetica", 24, "bold italic"))
+def bye(event):
+	turtle.bye()
+for i in range (100):
+	turtle.getcanvas().bind("<Return>",bye)
+	turtle.getcanvas().bind("2",play)
+	turtle.getcanvas().bind("1",inst)
+	turtle.listen()				
 
 
 platform=turtle.clone()
@@ -28,6 +64,8 @@ platform.shape("square")
 platform.shapesize(0.8,7)
 platform.goto(0,-SCREEN_HEIGHT+20)
 
+height = 3
+width = 1
 
 BLOCKS=[]
 NUMBER_OF_BLOCKS_LINE=9
@@ -38,7 +76,7 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 
 		x=l
 		y=SCREEN_HEIGHT-t
-		new_block=Block(x,y,color)
+		new_block=Block(x,y,color,width,height)
 		BLOCKS.append(new_block)
 
 		l=l+70
@@ -62,7 +100,9 @@ def collision(ball_a,block_a):
 	ball_a.bottom() <= block_a.top() and
 	ball_a.left() <= block_a.right()
 	):
-		return collision
+		return True
+	else:
+		return False
 
 def movearound(event):
 	platform.goto(event.x-SCREEN_WIDTH,-SCREEN_HEIGHT+20)
@@ -86,69 +126,37 @@ turtle.getscreen().listen()
 def check_myball_collision():
 	global score , score_total
 	for b in BLOCKS:
-		if collission(MY_BALL,b) == True:
-			MY_BALL_RADIUS=MY_BALL.radius
-			b_radius=b.radius
-			if MY_BALL_RADIUS<b_radius:
-				x= random.randint(int(-SCREEN_WIDTH+MAXIMUM_BALL_RADIUS), int(SCREEN_WIDTH-MAXIMUM_BALL_RADIUS))
-				y= random.randint(int(-SCREEN_HEIGHT+MAXIMUM_BALL_RADIUS), int(SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS))
-				dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-				dy= random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-				while dx==0:
-					dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-				while dy==0:
-					dy=random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-				radius= random.randint(MINIMUM_BALL_RADIUS , MAXIMUM_BALL_RADIUS)
-				color=(random.random(), random.random(), random.random())
-				b.goto(x,y)
-				b.dx=dx
-				b.dy=dy
-				b.radius=radius
-				b.shapesize(b.radius/10)
-				return False
+		if collision(MY_BALL,b) == True:
+			print("collided")
+			b.hideturtle()
+				
+		
+			if score == 10000:
+				print("YOU WIN")
+				score_total.pu()
+				score_total.goto(0,-250)
+				score_total.clear()
+				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
+				score_total.goto(0,0)
+				score_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
+				time.sleep(0.9)
+				turtle.bye()
+
+
 			else:
-				if score == 100:
-					print("YOU WIN")
-					score_total.pu()
-					score_total.goto(0,250)
-					score_total.clear()
-					score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
-					score_total.goto(0,0)
-					score_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
-					time.sleep(0.9)
-					turtle.bye()
+				score+=1 
+				score_total.pu()
+				score_total.goto(0,-250)
+				score_total.clear()
+				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
-
-				else:
-					score+=1 
-					score_total.pu()
-					score_total.goto(0,250)
-					score_total.clear()
-					score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
-					x= random.randint(int(-SCREEN_WIDTH+MAXIMUM_BALL_RADIUS), int(SCREEN_WIDTH-MAXIMUM_BALL_RADIUS))
-					y= random.randint(int(-SCREEN_HEIGHT+MAXIMUM_BALL_RADIUS), int(SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS))
-					dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-					dy= random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-					while dx==0:
-						dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-					while dy==0:
-						dy=random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-					radius= random.randint(MINIMUM_BALL_RADIUS , MAXIMUM_BALL_RADIUS)
-					color=(random.random(), random.random(), random.random())
-					b.goto(x,y)
-					
-					b.dx=dx
-					b.dy=dy
-					b.radius=radius
-					b.shapesize(b.radius/10)
-					MY_BALL.radius+=1
-					print(MY_BALL_RADIUS)
-					MY_BALL.shapesize(MY_BALL_RADIUS/10)
-
+			
 
 while True:
 	turtle.update()
 	move_all_balls()
-turtle.write("GAME OVER")
+	check_myball_collision()
+
+
 
 turtle.mainloop()

@@ -16,6 +16,7 @@ def inst():
 	inn.shape("in.gif")
 	inn.stamp()
 	turtle.update()
+	
 def play():
 	turtle.clear()
 	turtle.update()
