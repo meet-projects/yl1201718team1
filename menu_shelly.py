@@ -1,7 +1,13 @@
 import turtle
 import time
+from ball import Ball
 
-def inst(event):
+J = turtle.Canvas()
+SCREEN_WIDTH = J.winfo_width() / 2
+SCREEN_HEIGHT = J.winfo_height() / 2
+mouse=Ball(0,0,0,0,10, "blue")
+
+def inst():
 
 	inn=turtle.clone()
 	inn.home()
@@ -10,7 +16,8 @@ def inst(event):
 	inn.shape("in.gif")
 	inn.stamp()
 	turtle.update()
-def play(event):
+	
+def play():
 	turtle.clear()
 	turtle.update()
 
@@ -26,14 +33,20 @@ turtle.write("""
 
 
 
-		PRESS ENTER TO QUIT
+		PRESS 3 TO QUIT
 		""",True, align="center", font=("Helvetica", 24, "bold italic"))
-def bye(event):
-	turtle.bye()
 
-turtle.getcanvas().bind("<Return>",bye)
-turtle.getcanvas().bind("2",play)
-turtle.getcanvas().bind("1",inst)
+def movearound(event):
+    x1 = event.x - SCREEN_WIDTH
+    y1 = SCREEN_HEIGHT - event.y
+    turtle.goto(x1, y1)
+
+
+turtle.getcanvas().bind("<Motion>", movearound)
 turtle.listen()
+
+
+
+time.sleep(7)
 
 turtle.mainloop()
