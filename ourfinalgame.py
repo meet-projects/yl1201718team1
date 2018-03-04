@@ -12,59 +12,6 @@ tracer(0)
 
 IS_GAME_OVER = False
 
-
-def inst(event):
-	turtle.clear()
-	turtle.goto(300,-250)
-	turtle.write("""
-		A BRICK WALL APPEARS AT THE SCREEN 
-		AND OUR MISSION IS TO SMASH IT
-		ONE BREAK AT A TIME!
-
-		*use the mouse to move the platform
-		across the bottom screen
-
-		*across the bottom screen
-		each time the ball hits a break, 
-		the brick disappears 
-		and you score points
-
-		2. PLAY!!
-
-		PRESS ENTER TO QUIT
-		""",True, align="right", font=("Helvetica", 15,"bold italic"))
-	turtle.update()
-def play(event):
-	turtle.clear()
-	turtle.update()
-	
-
-
-ans = True
-turtle.ht()
-turtle.tracer(0)
-turtle.penup()
-turtle.goto (-100,-100)
-turtle.write("""
-		1. INSTRUCTIONS
-		2. PLAY!!
-
-
-
-
-		PRESS ENTER TO QUIT
-		""",True, align="center", font=("Helvetica", 24, "bold italic"))
-def bye(event):
-	turtle.bye()
-for i in range (10000):
-	turtle.getcanvas().bind("<Return>",bye)
-	turtle.getcanvas().bind("2",play)
-	turtle.getcanvas().bind("1",inst)
-	turtle.listen()
-
-
-
-
 score=0
 score_total=turtle.clone()	
 
@@ -75,12 +22,11 @@ SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
 
 
+		
 
 platform=Block(0,-SCREEN_HEIGHT+20,"black",0.8,7)
 
 
-height = 3
-width = 1
 
 BLOCKS=[]
 NUMBER_OF_BLOCKS_LINE=9
@@ -91,7 +37,6 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 
 		x=l
 		y=SCREEN_HEIGHT-t
-		new_block=Block(x,y,color,width,height)
 		new_block=Block(x,y,color,1,3)
 		BLOCKS.append(new_block)
 
@@ -164,9 +109,8 @@ def check_myball_collision():
 			# elif MY_BALL.left() <= block.right():
 			# 	self.dx = -self.dx
 
-
 			
-
+				
 		
 			if score == len(BLOCKS):
 				print("YOU WIN")
@@ -188,6 +132,9 @@ def check_myball_collision():
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
 
+# def 
+
+
 
 while IS_GAME_OVER != True:
 	move_all_balls()
@@ -198,6 +145,5 @@ while IS_GAME_OVER != True:
 	
 
 turtle.write("GAME OVER")
-
 
 turtle.mainloop()
