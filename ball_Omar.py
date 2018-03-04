@@ -31,7 +31,7 @@ class Ball(Turtle):
 	def left(self):
 		return self.xcor()-self.radius/2
 		
-	def move(self,screen_width,screen_height, BLOCKS):
+	def move(self,screen_width,screen_height):
 		current_x=self.xcor()
 		current_y=self.ycor()
 		new_x=current_x+self.dx
@@ -64,25 +64,10 @@ class Ball(Turtle):
 			self.dy=0
 			self.dx=0
 
-		for block in BLOCKS:
-			if self.top() >= block.bottom():
-				self.dy = -self.dy
 
-			elif self.right() >= block.left():
-				self.dx = -self.dx
-			
-			elif self.bottom() <= block.top():
-				self.dy = -self.dy
-
-			elif self.left() <= block.right():
-				self.dx = -self.dx
 			
 
 
 
 
 
-#ball_1=Ball(0,0,5,10,30,"blue")
-#for i in range(50):
-	#ball_1.move(200,200)
-	#getscreen().update()

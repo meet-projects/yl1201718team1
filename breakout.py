@@ -9,6 +9,7 @@ import math
 
 tracer(0)
 
+
 IS_GAME_OVER = False
 
 score=0
@@ -47,11 +48,11 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 # turtle.pd()
 turtle.ht()
 
-MY_BALL=Ball(0,0,1,1,10,"turquoise")
+MY_BALL=Ball(0,0,3,3,10,"turquoise")
 MY_BALL.goto(0,-SCREEN_HEIGHT+50)
 
 def move_all_balls():
-	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT, BLOCKS)
+	MY_BALL.move(SCREEN_WIDTH,SCREEN_HEIGHT)
 
 def collision(ball_a,block_a):
 	if(
@@ -87,22 +88,38 @@ def ball_plat():
 
 def check_myball_collision():
 	global score , score_total
-	for b in BLOCKS:
-		if collision(MY_BALL,b) == True:
-			b.ht()
-			BLOCKS.remove(b)
+	for block in BLOCKS:
+		if collision(MY_BALL,block) == True:
+			block.ht()
+			BLOCKS.remove(block)
+			if(MY_BALL.ycor() < block.bottom() or MY_BALL.ycor() > block.top()):
+				MY_BALL.dy = -MY_BALL.dy
+			else:
+				MY_BALL.dx = -MY_BALL.dx
+
+			# if MY_BALL.top() >= block.bottom() :
+			# 	self.dy = -self.dy
+
+			# elif MY_BALL.right() >= block.left():
+			# 	self.dx = -self.dx
+			
+			# elif MY_BALL.bottom() <= block.top():
+			# 	self.dy = -self.dy
+
+			# elif MY_BALL.left() <= block.right():
+			# 	self.dx = -self.dx
 
 			
 				
 		
-			if score == 10000:
+			if score == len(BLOCKS):
 				print("YOU WIN")
 				score_total.pu()
 				score_total.goto(0,-250)
 				score_total.clear()
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 				score_total.goto(0,0)
-				score_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
+				scoreb_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
 				time.sleep(0.9)
 				turtle.bye()
 
@@ -113,6 +130,10 @@ def check_myball_collision():
 				score_total.goto(0,-250)
 				score_total.clear()
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
+
+
+# def 
+
 
 
 while IS_GAME_OVER != True:
