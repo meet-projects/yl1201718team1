@@ -11,20 +11,6 @@ tracer(0)
 
 IS_GAME_OVER = False
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
-score=0
-score_total=turtle.clone()	
-
-
-t=20
-l=-290
-SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
-SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
-
-<<<<<<< HEAD
 i=0
 def inst(event):
 
@@ -60,11 +46,27 @@ for i in range (100):
 	turtle.getcanvas().bind("<Return>",bye)
 	turtle.getcanvas().bind("2",play)
 	turtle.getcanvas().bind("1",inst)
-	turtle.listen()				
-=======
+	turtle.listen()	
+
+# <<<<<<< HEAD
+
+# =======
+# >>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
+score=0
+score_total=turtle.clone()	
+
+
+t=20
+l=-290
+SCREEN_WIDTH=turtle.getcanvas().winfo_width()/2
+SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
+
+# <<<<<<< HEAD
+			
+# =======
 
 		
->>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
+# >>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 
 platform=Block(0,-SCREEN_HEIGHT+20,"black",0.8,7)
 
@@ -81,11 +83,8 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 
 		x=l
 		y=SCREEN_HEIGHT-t
-<<<<<<< HEAD
 		new_block=Block(x,y,color,width,height)
-=======
 		new_block=Block(x,y,color,1,3)
->>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
 		BLOCKS.append(new_block)
 
 		l=l+70
@@ -138,16 +137,14 @@ def check_myball_collision():
 	global score , score_total
 	for b in BLOCKS:
 		if collision(MY_BALL,b) == True:
-<<<<<<< HEAD
 			print("collided")
 			b.hideturtle()
-=======
+
 			b.ht()
 			BLOCKS.remove(b)
 
 			
->>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
-				
+
 		
 			if score == 10000:
 				print("YOU WIN")
@@ -168,7 +165,7 @@ def check_myball_collision():
 				score_total.clear()
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
-<<<<<<< HEAD
+
 			
 
 while True:
@@ -177,7 +174,7 @@ while True:
 	check_myball_collision()
 
 
-=======
+
 
 while IS_GAME_OVER != True:
 	move_all_balls()
@@ -188,6 +185,6 @@ while IS_GAME_OVER != True:
 	
 
 turtle.write("GAME OVER")
->>>>>>> c0fa3192c7b0cd2f1a8b3b4f7c9420cfbec5694b
+
 
 turtle.mainloop()
