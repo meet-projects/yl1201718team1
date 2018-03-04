@@ -11,7 +11,8 @@ tracer(0)
 
 
 
-	
+score=0
+score_total=turtle.clone()	
 
 
 t=20
@@ -87,69 +88,37 @@ def ball_plat():
 def check_myball_collision():
 	global score , score_total
 	for b in BLOCKS:
-		if collission(MY_BALL,b) == True:
-			MY_BALL_RADIUS=MY_BALL.radius
-			b_radius=b.radius
-			if MY_BALL_RADIUS<b_radius:
-				x= random.randint(int(-SCREEN_WIDTH+MAXIMUM_BALL_RADIUS), int(SCREEN_WIDTH-MAXIMUM_BALL_RADIUS))
-				y= random.randint(int(-SCREEN_HEIGHT+MAXIMUM_BALL_RADIUS), int(SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS))
-				dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-				dy= random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-				while dx==0:
-					dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-				while dy==0:
-					dy=random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-				radius= random.randint(MINIMUM_BALL_RADIUS , MAXIMUM_BALL_RADIUS)
-				color=(random.random(), random.random(), random.random())
-				b.goto(x,y)
-				b.dx=dx
-				b.dy=dy
-				b.radius=radius
-				b.shapesize(b.radius/10)
-				return False
+		if collision(MY_BALL,b) == True:
+			print("collided")
+			b.hideturtle()
+			
+				
+		
+			if score == 10000:
+				print("YOU WIN")
+				score_total.pu()
+				score_total.goto(0,-250)
+				score_total.clear()
+				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
+				score_total.goto(0,0)
+				score_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
+				time.sleep(0.9)
+				turtle.bye()
+
+
 			else:
-				if score == 100:
-					print("YOU WIN")
-					score_total.pu()
-					score_total.goto(0,250)
-					score_total.clear()
-					score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
-					score_total.goto(0,0)
-					score_total.write("YOU WIN"+str(score),align="center",font=("Arial",80,"normal"))
-					time.sleep(0.9)
-					turtle.bye()
-
-
-				else:
-					score+=1 
-					score_total.pu()
-					score_total.goto(0,250)
-					score_total.clear()
-					score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
-					x= random.randint(int(-SCREEN_WIDTH+MAXIMUM_BALL_RADIUS), int(SCREEN_WIDTH-MAXIMUM_BALL_RADIUS))
-					y= random.randint(int(-SCREEN_HEIGHT+MAXIMUM_BALL_RADIUS), int(SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS))
-					dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-					dy= random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-					while dx==0:
-						dx= random.randint(MINIMUM_BALL_DX,MAXIMUM_BALL_DX)
-					while dy==0:
-						dy=random.randint(MINIMUM_BALL_DY , MAXIMUM_BALL_DY)
-					radius= random.randint(MINIMUM_BALL_RADIUS , MAXIMUM_BALL_RADIUS)
-					color=(random.random(), random.random(), random.random())
-					b.goto(x,y)
-					
-					b.dx=dx
-					b.dy=dy
-					b.radius=radius
-					b.shapesize(b.radius/10)
-					MY_BALL.radius+=1
-					print(MY_BALL_RADIUS)
-					MY_BALL.shapesize(MY_BALL_RADIUS/10)
+				score+=1 
+				score_total.pu()
+				score_total.goto(0,-250)
+				score_total.clear()
+				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
 
 while True:
 	move_all_balls()
+	check_myball_collision()
 	ball_plat()
+
 	turtle.update()
 
 turtle.write("GAME OVER")

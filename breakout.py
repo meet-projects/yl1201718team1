@@ -2,8 +2,8 @@ from turtle import *
 import random
 import turtle
 import time
-from block import Block
-from ball import Ball
+from block_Omar import Block
+from ball_Omar import Ball
 import math
 
 
@@ -22,15 +22,9 @@ SCREEN_HEIGHT=turtle.getcanvas().winfo_height()/2
 
 		
 
+platform=Block(0,-SCREEN_HEIGHT+20,"black",0.8,7)
 
-platform=turtle.clone()
-platform.penup()
-platform.shape("square")
-platform.shapesize(0.8,7)
-platform.goto(0,-SCREEN_HEIGHT+20)
 
-height = 3
-width = 1
 
 BLOCKS=[]
 NUMBER_OF_BLOCKS_LINE=9
@@ -41,7 +35,7 @@ for i in range(NUMBER_OF_BLOCKS_COLUMN):
 
 		x=l
 		y=SCREEN_HEIGHT-t
-		new_block=Block(x,y,color,width,height)
+		new_block=Block(x,y,color,1,3)
 		BLOCKS.append(new_block)
 
 		l=l+70
@@ -80,7 +74,10 @@ turtle.getscreen().listen()
 
 
 
-
+def ball_plat():
+	if collision(platform,MY_BALL)==True:
+		print("collided")
+		MY_BALL.dy=-(MY_BALL.dy)
 
 
 
@@ -94,6 +91,7 @@ def check_myball_collision():
 		if collision(MY_BALL,b) == True:
 			print("collided")
 			b.hideturtle()
+			
 				
 		
 			if score == 10000:
@@ -115,13 +113,14 @@ def check_myball_collision():
 				score_total.clear()
 				score_total.write("SCORE: "+str(score),align="center",font=("Arial",20,"normal"))
 
-					
 
 while True:
-	turtle.update()
 	move_all_balls()
 	check_myball_collision()
+	ball_plat()
 
+	turtle.update()
 
+turtle.write("GAME OVER")
 
 turtle.mainloop()
